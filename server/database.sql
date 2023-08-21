@@ -1,6 +1,7 @@
-CREATE DATABASE IF NOT EXISTS ofs;
+CREATE DATABASE ofs;
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    description VARCHAR(255)
+    user_id int PRIMARY KEY,
+    username varchar(25),
+    password varchar(30)
 )
