@@ -8,8 +8,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server --hot --mode development --host 0.0.0.0 --disable-host-check",
-    "start-server": "nodemon --watch server -e js,html index.js",
-    "dev": "nodemon --watch server -e js,html server.js"
+    "dev": "nodemon --watch server -e js,html index.js"
   },
   "keywords": [],
   "authors": [
