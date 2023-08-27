@@ -1,56 +1,38 @@
-const path = require('path')
 const express = require('express')
-const morgan = require('morgan')
-const bodyParser = require('body-parser')
-const webpack = require('webpack')
-const middleware = require('webpack-dev-middleware')
-const webpackConfig = require('../webpack.config')
-const compiler = webpack(webpackConfig)
-
+const cors = require('cors')
 const app = express()
-const PORT = process.env.PORT || 5940
+const { PORT, CLIENT_URL } = require('./constants')
+const cookieParser = require('cookie-parser')
+const passport = require('passport')
+// const PORT = 8000
 
-app.listen(PORT, () => console.log(`Server Listening on ${PORT}`))
+//import passport middleware
+require('./middleware/passport-middleware')
 
-app.use(require("webpack-hot-middleware")(compiler, {
-  'log': false, 
-  'path': '/__webpack_hmr', 
-  'heartbeat': 10 * 1000
-}))
+//intialize middleware
+app.use(cors({ origin: CLIENT_URL, credentials: true }))
+app.use(express.json())
+app.use(cookieParser())
+app.use(passport.initialize())
 
-app.use(middleware(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}))
+//import routes
+const authRoutes = require('./routes/auth')
 
-app.use(morgan('dev'))
+//initialize routes
+app.use('/api', authRoutes)
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+const start = () => {
 
-app.use(express.static(path.join(__dirname, '..', 'src')))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'))
-})
-
-app.use((req, res, next) => {
-  if (path.extname(req.path).length > 0) {
-    res.status(404).end()
-  } else {
-    next()
+  try {
+    app.listen(PORT, () => {
+      console.log(`listening at http://localhost:${PORT}`)
+    })
+  } 
+  catch (err) {
+    console.log(`error: ${err.message}`)
   }
-})
-
-app.get('/*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'src', 'index.html'))
-})
-
-app.use((err, req, res, next) => {
-  console.error(err, typeof next)
-  console.error(err.stack)
-  res.status(err.status || 500).send(err.message || 'Internal server error.')
-})
-
+}
+start()
 
 module.exports = app
