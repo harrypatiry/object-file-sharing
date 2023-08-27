@@ -2,7 +2,11 @@ const { check } = require('express-validator');
 const db = require('../database/db');
 const { compare } = require('bcryptjs');
 
+<<<<<<< HEAD
 //username
+=======
+//password 
+>>>>>>> bd632035e9abfeb0b02fbc95ce5221b4f7c17caa
 const username = check('username').isLength({ min: 2, max: 15})
 .withMessage('Username must be between 2 and 15 characters.')
 
