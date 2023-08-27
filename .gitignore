@@ -5,3 +5,4 @@ npm-debug.log
 coverage
 public/bundle.js
 public/bundle.js.map
+.env
