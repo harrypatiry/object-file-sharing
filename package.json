@@ -8,8 +8,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server --hot --mode development --host 0.0.0.0 --disable-host-check",
-    "start-server": "nodemon --watch server -e js,html index.js",
-    "dev": "nodemon --watch server -e js,html server.js"
+    "start-server": "nodemon --watch server -e js,html index.js"
   },
   "keywords": [],
   "authors": [
@@ -18,27 +17,17 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "express-validation": "^4.1.0",
-    "express-validator": "^7.0.1",
     "lodash": "^4.17.21",
     "morgan": "^1.9.1",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "pg": "^8.11.3",
+    "pg": "^8.11.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-modal": "^3.16.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^4.2.2",
-    "sequelize": "^6.32.1",
-    "volleyball": "^1.0.0"
+    "sequelize": "^6.32.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -49,7 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^3.2.0",
-    "nodemon": "^1.19.4",
+    "nodemon": "^1.18.5",
     "react-hot-loader": "^4.8.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
