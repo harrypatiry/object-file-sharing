@@ -4,7 +4,6 @@ const app = express()
 const { PORT, CLIENT_URL } = require('./constants')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
-// const PORT = 8000
 
 //import passport middleware
 require('./middleware/passport-middleware')
