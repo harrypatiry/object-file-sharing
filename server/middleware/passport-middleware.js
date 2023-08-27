@@ -17,11 +17,7 @@ const opts = {
 passport.use(
     new Strategy(opts, async ({ id }, done) => {
         try {
-<<<<<<< HEAD
             const { rows } = await db.query(`SELECT id, email FROM users WHERE id = $1`, [id])
-=======
-            const { rows } = await db.query(`SELECT user_id, email FROM users WHERE user_id = $1`, [id])
->>>>>>> bd632035e9abfeb0b02fbc95ce5221b4f7c17caa
             
             if (!rows.length) {
                 throw new Error('401 Unauthorized')
