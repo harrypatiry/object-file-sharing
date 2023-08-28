@@ -12,11 +12,12 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id serial PRIMARY KEY,
-    author int FOREIGN KEY,
-    description VARCHAR(255),
-    cover varchar(255),
-    media text[] 
-)
+    author int, 
+    description varchar(255),
+    media varchar(255),
+    files varchar(255),
+    FOREIGN KEY (author) REFERENCES users (id)
+);
 
 
 -- FROM posts INNER JOIN users ON posts.author = users.id;

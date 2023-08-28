@@ -6,3 +6,5 @@ router.get('/get-posts', getPosts)
 router.post('/create', createPost)
 router.post('/update', updatePost)
 router.delete('/delete', deletePost)
+
+module.exports = router
