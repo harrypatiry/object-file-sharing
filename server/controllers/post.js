@@ -1,4 +1,5 @@
 const db = require('../database/db');
+const multer = require('multer');
 
 exports.getPosts = async (req, res) => {
     try{
