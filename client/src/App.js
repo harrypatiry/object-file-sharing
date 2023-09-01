@@ -1,24 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes, Outlet, Navigate } from 'react-router-dom';
+import Home from './pages/home'
+import Login from './pages/login'
+import Register from './pages/register'
+import Dashboard from './pages/dashboard';
+import Navbar from './components/navbar';
 
-function App() {
+const Private = () => {
+  const isAuth = false 
+
+  return <>{isAuth ? <Outlet /> : <Navigate to='/login'/>}</>
+}
+
+const Restricted = () => {
+  const isAuth = false 
+
+  return <>{!isAuth ? <Outlet /> : <Navigate to='/dashboard'/>}</>
+}
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route element={<Private/>}>
+          <Route path='/dashboard' element={<Dashboard/>}/>
+        </Route>
+        <Route element={<Restricted/>}>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

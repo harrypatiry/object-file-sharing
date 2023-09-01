@@ -14,7 +14,7 @@ CREATE TABLE posts (
     id serial PRIMARY KEY,
     author int, 
     description varchar(255),
-    media varchar(255),
+    image_url varchar(255),
     files varchar(255),
     FOREIGN KEY (author) REFERENCES users (id)
 );
