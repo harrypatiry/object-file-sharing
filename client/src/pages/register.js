@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout'
-import { Registration } from '../api/auth'
+import { onRegistration } from '../api/auth'
 
 export default function Register() {
   const [value, setValue] = useState({
@@ -19,7 +19,7 @@ export default function Register() {
     e.preventDefault()
 
     try {
-      const {data} = await Registration(value)
+      const {data} = await onRegistration(value)
       setError('')
       setSuccess(data.message)
       setValue({ email: '', username: '', password: '' })
