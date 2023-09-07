@@ -12,7 +12,10 @@ const Navbar = () => {
             <span className='navbar-brand mb-0 h1'>Home</span>
           </NavLink>
         </div>
-
+        <NavLink to='/post' className='mx-3'>
+            <span>Post</span>
+        </NavLink>
+        
         {isAuth ? (
           <div>
             <NavLink to='/dashboard' className='mx-3'>
@@ -24,7 +27,6 @@ const Navbar = () => {
             <NavLink to='/login'>
               <span>Login</span>
             </NavLink>
-
             <NavLink to='/register' className='mx-3'>
               <span>Register</span>
             </NavLink>

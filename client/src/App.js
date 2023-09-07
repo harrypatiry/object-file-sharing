@@ -4,6 +4,7 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
 import Dashboard from './pages/dashboard';
+import Post from './pages/post';
 import { useSelector } from 'react-redux';
 
 const Private = () => {
@@ -15,7 +16,7 @@ const Private = () => {
 const Restricted = () => {
   const {isAuth} = useSelector(state => state.auth)
 
-  return <>{!isAuth ? <Outlet /> : <Navigate to='/dashboard'/>}</>
+  return <>{!isAuth ? <Outlet /> : <Navigate to='/'/>}</>
 }
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
         </Route>
+        <Route path='/post' element={<Post/>}/>
       </Routes>
     </BrowserRouter>
   );
