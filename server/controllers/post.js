@@ -14,8 +14,12 @@ exports.getPosts = async (req, res) => {
 }
 
 exports.createPost = async (req, res) => {
-    console.log("request body:", req.body)
-    res.send({})
+    const fileName = req.file.filename
+
+  // Save this data to a database probably
+
+    console.log(fileName)
+    res.send({fileName})
 }
 
 exports.updatePost = async (req, res) => {

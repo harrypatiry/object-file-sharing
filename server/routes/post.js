@@ -1,9 +1,13 @@
 const { Router } = require('express')
-const { getPosts, createPost, deletePost, updatePost } = require('../controllers/post')
+const { getPosts, deletePost, updatePost, createPost } = require('../controllers/post')
 const router = Router()
 
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 router.get('/get-posts', getPosts)
-router.post('/create', createPost)
+router.post('/create', upload.single("file"), createPost)
+
 router.post('/update', updatePost)
 router.delete('/delete', deletePost)
 
