@@ -1,5 +1,6 @@
 const db = require('../database/db');
 const multer = require('multer');
+const fs = require('fs')
 
 exports.getPosts = async (req, res) => {
     try{
@@ -14,12 +15,31 @@ exports.getPosts = async (req, res) => {
 }
 
 exports.createPost = async (req, res) => {
-    const fileName = req.file.filename
+    // Save this data to a database probably
+    
+    try{
+        // change file name to add file extension
+        const fileName = req.file.filename
+        let fileType = req.file.mimetype.split('/')[1]
+        let newFileName = req.file.filename + '.' + fileType
 
-  // Save this data to a database probably
+        fs.rename(`../uploads/${req.file.filename}`, newFileName, () => {
+            console.log("callback")
+        })
+        console.log(newFileName)
+        res.send({fileName})
 
-    console.log(fileName)
-    res.send({fileName})
+        // await db.query('INSERT INTO posts (files) VALUES $1', [newFileName])
+        // return res.status(201).json({
+        //     success: true,
+        //     message: 'file was successfully uploaded.'
+        // })
+    } catch(err){
+        console.log(err.message)
+        return res.status(500).json({
+            error: err.message
+        })
+    }
 }
 
 exports.updatePost = async (req, res) => {

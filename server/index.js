@@ -15,11 +15,9 @@ app.use(cookieParser())
 app.use(passport.initialize())
 
 //import routes
-// const authRoutes = require('./routes/auth')
 const routes = require('./routes')
 
 //initialize routes
-// app.use('/api', authRoutes)
 app.use('/api', routes)
 
 const start = () => {
