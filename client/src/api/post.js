@@ -1,7 +1,11 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-export default async function onPost({data}) {
-    axios.post('http://localhost:8000/api/post/create', {data: data})
-    //https://javascript.plainenglish.io/object-literals-using-object-property-shorthand-6360825c60ef
+export default async function onPost(formData) {
+    try {
+        const result = await axios.post('http://localhost:8000/api/post/create', formData, { headers: {'Content-Type': 'multipart/form-data'}})
+        console.log(result.data)
+      } catch (error) {
+        console.log(error.response)
+      }
 }

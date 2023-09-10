@@ -22,9 +22,10 @@ exports.createPost = async (req, res) => {
         const fileName = req.file.filename
         let fileType = req.file.mimetype.split('/')[1]
         let newFileName = req.file.filename + '.' + fileType
+        console.log(req.file.mimetype)
 
-        fs.rename(`../uploads/${req.file.filename}`, newFileName, () => {
-            console.log("callback")
+        fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFileName}`, () => {
+            console.log("file renamed")
         })
         console.log(newFileName)
         res.send({fileName})

@@ -4,24 +4,14 @@ import onPost from '../api/post'
 import axios from 'axios'
 
 export default function Post() {
-    const [error, setError] = useState(false)
     const [file, setFile] = useState()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // try {
-        //     await onPost({data: data})
-        //     // dispatch(authenticateUser())
-        //     // localStorage.setItem('isAuth', 'true')
-        //   } catch (error) {
-        //     console.log(error.response.data.errors[0].msg)
-        //     setError(error.response.data.errors[0].msg)
-        //   }
         const formData = new FormData()
         formData.append("file", file)
+        await onPost(formData)
 
-        const result = await axios.post('http://localhost:8000/api/post/create', formData, { headers: {'Content-Type': 'multipart/form-data'}})
-        console.log(result.data)
     }
 
     const handleChange = (e) => {
@@ -37,7 +27,6 @@ export default function Post() {
         </div>
         <button type='submit' className='btn btn-primary'>Post</button>
       </form>
-      <div style={{ color: 'red', margin: '10px 0' }}>{error}</div>
     </Layout>
     )
 }
