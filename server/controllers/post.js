@@ -18,6 +18,7 @@ exports.createPost = async (req, res) => {
     // Save this data to a database probably
     
     try{
+        console.log(req.user)
         // change file name to add file extension
         const fileName = req.file.filename
         let fileType = req.file.mimetype.split('/')[1]
@@ -30,7 +31,7 @@ exports.createPost = async (req, res) => {
         console.log(newFileName)
         res.send({fileName})
 
-        // await db.query('INSERT INTO posts (files) VALUES $1', [newFileName])
+        // await db.query('INSERT INTO posts (files, author) VALUES $1', [newFileName])
         // return res.status(201).json({
         //     success: true,
         //     message: 'file was successfully uploaded.'

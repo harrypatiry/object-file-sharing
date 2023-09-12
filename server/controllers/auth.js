@@ -45,6 +45,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     let user = req.user
+    console.log(user.username)
     let payload = {
         id: user.id,
         email: user.email
@@ -61,6 +62,10 @@ exports.login = async (req, res) => {
             error: err.message
         });
     }
+}
+
+exports.getLoggedInUser = async (req, res) => {
+    console.log(req.user)
 }
 
 exports.logout = async (req, res) => {
