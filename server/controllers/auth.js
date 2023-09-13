@@ -45,13 +45,13 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     let user = req.user
-    console.log(user.username)
     let payload = {
         id: user.id,
-        email: user.email
+        username: user.username
     }
     try {
         const token = await sign(payload, SECRET)
+        console.log(user)
         return res.status(200).cookie('token', token, {httpOnly: true}).json({
             success: true,
             message: 'Login successful'

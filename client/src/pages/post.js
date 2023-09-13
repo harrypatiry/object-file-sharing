@@ -3,15 +3,16 @@ import Layout from '../components/layout'
 import onPost from '../api/post'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { selectUser } from '../redux/slices/userSlice'
 
 export default function Post() {
     const [file, setFile] = useState()
     const [error, setError] = useState(false)
-    const {isAuth} = useSelector(state => state.auth)
+    const user = useSelector(selectUser)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!isAuth) {
+        if (!user) {
             setError("You must be logged in to post.")
         } else {
             const formData = new FormData()

@@ -6,17 +6,18 @@ import Register from './pages/register'
 import Dashboard from './pages/dashboard';
 import Post from './pages/post';
 import { useSelector } from 'react-redux';
+import { selectUser } from './redux/slices/userSlice';
 
 const Private = () => {
-  const {isAuth} = useSelector(state => state.auth)
+  const user = useSelector(selectUser)
 
-  return <>{isAuth ? <Outlet /> : <Navigate to='/login'/>}</>
+  return <>{user ? <Outlet /> : <Navigate to='/login'/>}</>
 }
 
 const Restricted = () => {
-  const {isAuth} = useSelector(state => state.auth)
+  const user = useSelector(selectUser)
 
-  return <>{!isAuth ? <Outlet /> : <Navigate to='/'/>}</>
+  return <>{!user ? <Outlet /> : <Navigate to='/'/>}</>
 }
 
 const App = () => {

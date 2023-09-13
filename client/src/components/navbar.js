@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { selectUser } from '../redux/slices/userSlice'
 
 const Navbar = () => {
-  const {isAuth} = useSelector(state => state.auth)
+  const user = useSelector(selectUser)
 
   return (
     <nav className='navbar navbar-light bg-light'>
@@ -16,7 +17,7 @@ const Navbar = () => {
             <span>Post</span>
         </NavLink>
         
-        {isAuth ? (
+        {user ? (
           <div>
             <NavLink to='/dashboard' className='mx-3'>
               <span>Dashboard</span>
