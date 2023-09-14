@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { selectUser } from '../redux/slices/userSlice'
 
 const Navbar = () => {
-  const user = useSelector(selectUser)
+  const user = useSelector(x => x.user.user)
 
   return (
     <nav className='navbar navbar-light bg-light'>

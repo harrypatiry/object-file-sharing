@@ -3,12 +3,11 @@ import Layout from '../components/layout'
 import onPost from '../api/post'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../redux/slices/userSlice'
 
 export default function Post() {
     const [file, setFile] = useState()
     const [error, setError] = useState(false)
-    const user = useSelector(selectUser)
+    const user = useSelector(x => x.user.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

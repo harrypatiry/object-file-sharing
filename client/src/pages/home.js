@@ -2,23 +2,25 @@ import React from 'react'
 import Layout from '../components/layout'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../redux/slices/userSlice'
 
 export default function Home() {
-  const user = useSelector(selectUser)
+  const user = useSelector(x => x.user.user)
+  
   const getUser = () => {
-    axios.post('http://localhost:8000/api/auth/me')
+    // axios.post('http://localhost:8000/api/auth/me')
+    console.log(localStorage.getItem('user'))
   }
-  return user ? (
+  return localStorage.getItem('user') ? (
     <Layout>
       <div>home</div>
-      <h1>welcome <span>{user.name}</span></h1>
+      <h1>welcome <span>{user}</span></h1>
       <br></br>
       <button onClick={getUser}>get current user</button>
     </Layout>
   ) : (
     <Layout>
       <div>home</div>
+      <h1>not logged in</h1>
       <br></br>
       <button onClick={getUser}>get current user</button>
     </Layout>

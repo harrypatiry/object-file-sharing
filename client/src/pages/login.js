@@ -21,12 +21,9 @@ export default function Login() {
     e.preventDefault()
     try {
       await onLogin(value)
-      // dispatch(authenticateUser())
-      // localStorage.setItem('user', value.username)
-      // console.log(localStorage.getItem('user'))
+      
       dispatch(login({
         name: value.username,
-        loggedIn: true
       }))
     } catch (error) {
       console.log(error.response.data.errors[0].msg)
