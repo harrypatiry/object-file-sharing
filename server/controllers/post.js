@@ -1,6 +1,7 @@
 const db = require('../database/db');
 const multer = require('multer');
 const fs = require('fs')
+const { uploadFile } = require('../database/s3')
 
 exports.getPosts = async (req, res) => {
     try{
@@ -18,20 +19,15 @@ exports.createPost = async (req, res) => {
     // Save this data to a database probably
     
     try{
-        console.log(req.user)
         // change file name to add file extension
-        const fileName = req.file.filename
-        let fileType = req.file.mimetype.split('/')[1]
-        let newFileName = req.file.filename + '.' + fileType
-        console.log(req.file.mimetype)
+        const file = req.file
+        console.log(file)
+        const result = await uploadFile(file)
+        console.log(result)
 
-        fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFileName}`, () => {
-            console.log("file renamed")
-        })
-        console.log(newFileName)
-        res.send({fileName})
+        res.send('💾')
 
-        // await db.query('INSERT INTO posts (files, author) VALUES $1', [newFileName])
+        // await db.query('INSERT INTO posts (files) VALUES $1', [newFileName])
         // return res.status(201).json({
         //     success: true,
         //     message: 'file was successfully uploaded.'
