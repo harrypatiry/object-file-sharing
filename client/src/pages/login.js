@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout'
-import { onLogin } from '../api/auth'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/slices/userSlice'
+import axios from 'axios'
 
 export default function Login() {
   const [value, setValue] = useState({
     username: '',
     password: ''
   })
+  const [data, setData] = useState()
   const [error, setError] = useState(false)
 
   const onChange = (e) => {
@@ -20,16 +21,25 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault()
     try {
-      await onLogin(value)
-      
-      dispatch(login({
-        name: value.username,
-      }))
+      await axios.post(
+        'http://localhost:8000/api/auth/login', value)
+        .then((res) => {
+            setData(res.data.data.id);
+        })
+      if (data) {
+        dispatch(login({
+          name: value.username,
+        }))
+        this.forceUpdate()
+      }
     } catch (error) {
       console.log(error.response.data.errors[0].msg)
       setError(error.response.data.errors[0].msg)
     }
   }
+  useEffect(() => {
+    console.log(data)
+  }, [data])
   return (
     <Layout>
       <form onSubmit={(e) => onSubmit(e)} className='container mt-3'>

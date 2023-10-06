@@ -12,11 +12,13 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id serial PRIMARY KEY,
-    author int, 
     description varchar(255),
     image_url varchar(255),
     files varchar(255),
-    FOREIGN KEY (author) REFERENCES users (id)
+    user_id INT,
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id) 
+            REFERENCES "users"(id)
 );
 
 

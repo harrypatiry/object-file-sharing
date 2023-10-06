@@ -2,6 +2,7 @@ const db = require('../database/db');
 const multer = require('multer');
 const fs = require('fs')
 const { uploadFile } = require('../database/s3')
+const { BUCKET_NAME } = require('../constants')
 
 exports.getPosts = async (req, res) => {
     try{
@@ -19,11 +20,16 @@ exports.createPost = async (req, res) => {
     // Save this data to a database probably
     
     try{
-        // change file name to add file extension
+        // get file and username from request
         const file = req.file
+        const user = req.body.user
+        console.log(user)
         console.log(file)
         const result = await uploadFile(file)
         console.log(result)
+        // console.log(result.Key)
+        // grab the location of the uploaded file
+        location = `https://${BUCKET_NAME}.s3.amazonaws.com/${result.Key}`
 
         res.send('💾')
 

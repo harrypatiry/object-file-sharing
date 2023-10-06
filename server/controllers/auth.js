@@ -2,18 +2,7 @@ const db = require('../database/db');
 const {hash} = require('bcrypt');
 const {sign} = require('jsonwebtoken');
 const { SECRET } = require('../constants');
-
-exports.getUsers = async (req, res) => {
-    try{
-        const {rows} = await db.query('SELECT id, email FROM users')
-        return res.status(200).json({
-            success: true,
-            users: rows
-        })
-    } catch(err){
-        console.log(err.message)
-    }
-}
+const { response } = require('express');
 
 exports.protected = async (req, res) => {
     try{
@@ -52,12 +41,15 @@ exports.login = async (req, res) => {
     try {
         const token = await sign(payload, SECRET)
         console.log(user)
+        console.log(payload)
         return res.status(200).cookie('token', token, {httpOnly: true}).json({
             success: true,
-            message: 'Login successful'
+            message: 'Login successful',
+            data: payload
         })
     } catch (err) {
         console.log(err.message)
+        res.json("failed")
         return res.status(500).json({
             error: err.message
         });

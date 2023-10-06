@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout'
 import onPost from '../api/post'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 export default function Post() {
     const [file, setFile] = useState()
@@ -16,6 +16,7 @@ export default function Post() {
         } else {
             const formData = new FormData()
             formData.append("file", file)
+            formData.append("user", user)
             await onPost(formData)
         }
     }

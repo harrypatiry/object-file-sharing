@@ -8,13 +8,6 @@ export async function onRegistration(registrationData) {
     )
 }
 
-export async function onLogin(loginData) {
-    return await axios.post(
-        'http://localhost:8000/api/auth/login',
-        loginData
-    )
-}
-
 export async function onLogout() {
     return await axios.get('http://localhost:8000/api/auth/logout')
 }
