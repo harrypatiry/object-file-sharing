@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout'
 import onPost from '../api/post'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 export default function Post() {
+    const user = useSelector(x => x.user.user)
     const [file, setFile] = useState()
     const [error, setError] = useState(false)
-    const user = useSelector(x => x.user.user)
+    const [id, setId] = useState(null)
+    useEffect(() => {
+        (async function getUserId() {
+            const response = await axios.get(`http://localhost:8000/api/auth/me/${user}`)
+            console.log(response.data.id)
+            setId(response.data.id)
+        })()
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,6 +38,7 @@ export default function Post() {
     <Layout>
         <form onSubmit={handleSubmit} encType="multipart/form-data" className='container mt-3' >
         <div className='mb-3'>
+            <h2>{id}</h2>
             <input type='file' accept="image/*" filename={file} onChange={handleChange}/>
         </div>
         <button type='submit' className='btn btn-primary'>Post</button>

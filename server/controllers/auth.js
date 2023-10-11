@@ -57,7 +57,14 @@ exports.login = async (req, res) => {
 }
 
 exports.getLoggedInUser = async (req, res) => {
-    console.log(req.user)
+    const username = req.params.user
+    const user = await db.query('SELECT * from users WHERE username = $1', [username])
+    if (!user.rows.length) {
+        throw new Error('User does not exists.')
+    }
+    const userId = user.rows[0].id
+    res.json({id: userId})
+
 }
 
 exports.logout = async (req, res) => {

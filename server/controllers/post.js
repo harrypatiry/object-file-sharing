@@ -29,7 +29,7 @@ exports.createPost = async (req, res) => {
         console.log(result)
         // console.log(result.Key)
         // grab the location of the uploaded file
-        location = `https://${BUCKET_NAME}.s3.amazonaws.com/${result.Key}`
+        let location = `https://${BUCKET_NAME}.s3.amazonaws.com/${result.Key}`
 
         res.send('💾')
 
