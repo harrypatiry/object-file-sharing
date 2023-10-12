@@ -12,6 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id serial PRIMARY KEY,
+    title varchar(255),
     description varchar(255),
     image_url varchar(255),
     file_url varchar(255),
