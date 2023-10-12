@@ -14,12 +14,11 @@ CREATE TABLE posts (
     id serial PRIMARY KEY,
     description varchar(255),
     image_url varchar(255),
-    files varchar(255),
+    file_url varchar(255),
     user_id INT,
     CONSTRAINT fk_user
         FOREIGN KEY (user_id) 
             REFERENCES "users"(id)
 );
 
-
--- FROM posts INNER JOIN users ON posts.author = users.id;
+-- SELECT * FROM posts WHERE user_id = 0;

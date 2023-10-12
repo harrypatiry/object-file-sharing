@@ -25,6 +25,7 @@ export default function Post() {
             const formData = new FormData()
             formData.append("file", file)
             formData.append("user", user)
+            formData.append("id", id)
             await onPost(formData)
         }
     }

@@ -23,7 +23,8 @@ exports.createPost = async (req, res) => {
         // get file and username from request
         const file = req.file
         const user = req.body.user
-        console.log(user)
+        const id = req.body.id
+        // console.log(id)
         console.log(file)
         const result = await uploadFile(file)
         console.log(result)
@@ -31,13 +32,14 @@ exports.createPost = async (req, res) => {
         // grab the location of the uploaded file
         let location = `https://${BUCKET_NAME}.s3.amazonaws.com/${result.Key}`
 
+        await db.query('INSERT INTO posts (file_url, user_id) VALUES ($1, $2)', [location, id])
+        return res.status(201).json({
+            success: true,
+            message: 'file was successfully uploaded.'
+        })
         res.send('💾')
 
-        // await db.query('INSERT INTO posts (files) VALUES $1', [newFileName])
-        // return res.status(201).json({
-        //     success: true,
-        //     message: 'file was successfully uploaded.'
-        // })
+        
     } catch(err){
         console.log(err.message)
         return res.status(500).json({
