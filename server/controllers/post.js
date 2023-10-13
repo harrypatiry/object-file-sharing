@@ -9,7 +9,7 @@ exports.getPosts = async (req, res) => {
         const {rows} = await db.query('SELECT * FROM posts')
         return res.status(200).json({
             success: true,
-            users: rows
+            posts: rows
         })
     } catch(err){
         console.log(err.message)
@@ -17,8 +17,6 @@ exports.getPosts = async (req, res) => {
 }
 
 exports.createPost = async (req, res) => {
-    // Save this data to a database probably
-    
     try{
         // get file and username from request
         const file = req.file
