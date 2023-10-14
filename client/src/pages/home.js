@@ -14,22 +14,23 @@ export default function Home() {
         setPosts(response.data.posts)
       })()
     }, [])
-    console.log(posts[1])
 
-    const listItems = posts.map((post, index) => 
-        <li key={index}>
-          {post.id}
-          {post.title}
-          {post.description}
-          {post.file_url}
-        </li>
-      )
-  
+    const listItems = posts.map((post) => 
+      <div key={post.id} className="col-sm-6 mb-3 mb-sm-0">
+        <div className='card'>
+          <div className="card-body">
+            <img src={post.file_url} className="card-img-top" style={{overflow: "auto", maxHeight: "150px"}}/>
+            <h5 className="card-title">{post.title}</h5>
+            <p className='card-text'>{post.description}</p>
+          </div>
+        </div>
+      </div>
+    )
   return localStorage.getItem('user') ? (
     <Layout>
       <div>home</div>
       <h1>welcome <span>{user}</span></h1>
-      <ul>{listItems}</ul>
+          <div className="row">{listItems}</div>
     </Layout>
   ) : (
     <Layout>

@@ -35,7 +35,7 @@ exports.createPost = async (req, res) => {
         await db.query('INSERT INTO posts (file_url, title, description, user_id) VALUES ($1, $2, $3, $4)', [location, title, description, id])
         return res.status(201).json({
             success: true,
-            message: 'file was successfully uploaded.'
+            message: 'successfully uploaded.'
         })
         
     } catch(err){

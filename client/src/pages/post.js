@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function Post() {
     const user = useSelector(x => x.user.user)
     const [file, setFile] = useState()
+    const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [id, setId] = useState(null)
     const [text, setText] = useState({ 
@@ -32,7 +33,14 @@ export default function Post() {
             formData.append("id", id)
             formData.append("title", text.title)
             formData.append("description", text.description)
-            await onPost(formData)
+            try{
+                const {data} = await onPost(formData)
+                setSuccess(data.message)
+            } catch(err) {
+                console.error(err.response.data.errors[0].msg)
+                setError(err.response.data.errors[0].msg)
+                setSuccess('')
+            }
         }
     }
 
@@ -45,7 +53,11 @@ export default function Post() {
         setText({...text, [e.target.name]: e.target.value})
     }
 
-    return (
+    return success ? (
+        <Layout>
+            <div style={{ color: 'green', margin: '10px 0' }}>{success}</div>
+        </Layout>
+    ) : (
     <Layout>
         <form onSubmit={handleSubmit} encType="multipart/form-data" className='container mt-3' >
         <div className='mb-3'>
